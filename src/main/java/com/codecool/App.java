@@ -1,4 +1,4 @@
-package com.codecol;
+package com.codecool;
 
 
 public class App 

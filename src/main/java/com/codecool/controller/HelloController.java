@@ -1,4 +1,4 @@
-package com.codecol.controller;
+package com.codecool.controller;
 
 
 public class HelloController {

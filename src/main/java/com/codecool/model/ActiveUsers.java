@@ -1,4 +1,4 @@
-package com.codecol.model;
+package com.codecool.model;
 
 
 public class ActiveUsers {

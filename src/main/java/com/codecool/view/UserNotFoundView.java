@@ -1,4 +1,4 @@
-package com.codecol.view;
+package com.codecool.view;
 
 
 public class UserNotFoundView {

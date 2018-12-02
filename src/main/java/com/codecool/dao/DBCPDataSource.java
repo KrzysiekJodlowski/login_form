@@ -1,4 +1,4 @@
-package com.codecol.dao;
+package com.codecool.dao;
 
 
 public class DBCPDataSource {

@@ -1,4 +1,4 @@
-package com.codecol;
+package com.codecool;
 
 import static org.junit.Assert.assertTrue;
 
