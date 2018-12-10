@@ -1,5 +1,5 @@
 package com.codecool.view;
 
 
-public class HelloView {
+public class TemplateView {
 }
