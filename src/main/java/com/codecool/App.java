@@ -4,6 +4,7 @@ import com.codecool.controller.HelloController;
 import com.codecool.controller.LoginController;
 import com.codecool.controller.StaticController;
 import com.codecool.controller.UserNotFoundController;
+import com.codecool.view.TemplateView;
 import com.sun.net.httpserver.HttpServer;
 import com.codecool.dao.DBCPDataSource;
 
@@ -17,13 +18,16 @@ public class App
         // Initialize connection pool
         DBCPDataSource connectionPool = new DBCPDataSource();
 
+        // Initialize TemplateView
+        TemplateView templateView = new TemplateView();
+
         // create a server on port 8000
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
         // set routes
-        server.createContext("/login", new LoginController(connectionPool));
-        server.createContext("/hello", new HelloController(connectionPool));
-        server.createContext("/usernotfound", new UserNotFoundController());
+        server.createContext("/login", new LoginController(connectionPool, templateView));
+        server.createContext("/hello", new HelloController(connectionPool, templateView));
+        server.createContext("/usernotfound", new UserNotFoundController(templateView));
         server.createContext("/static", new StaticController());
         server.setExecutor(null); // creates a default executor
 
