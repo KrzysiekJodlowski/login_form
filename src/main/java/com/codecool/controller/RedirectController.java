@@ -11,15 +11,16 @@ import java.util.Map;
 
 public class RedirectController {
 
-    public void redirect(HttpExchange httpExchange, String contextName) throws IOException {
+    public void redirect(HttpExchange httpExchange, String contextName, String username) throws IOException {
 
         Headers req = httpExchange.getRequestHeaders();
-        Headers map = httpExchange.getResponseHeaders();
         String host = req.getFirst("Host");
-        String location = "http://" + host + contextName;
 
+        Headers map = httpExchange.getResponseHeaders();
         map.set("Content-Type", "text/html");
+        String location = "http://" + host + contextName;
         map.set("Location", location);
+
         httpExchange.sendResponseHeaders(302, -1);
         httpExchange.close();
     }

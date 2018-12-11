@@ -2,6 +2,7 @@ package com.codecool.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SessionDAOimpl implements SessionDAO {
@@ -50,16 +51,16 @@ public class SessionDAOimpl implements SessionDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    } /*
+    }
 
     @Override
-    public int getUserIdBySession(String sessionId) {
-        int userId = -1;
-        String query = "SELECT * FROM session WHERE session_id = ?;";
+    public int getUserBySessionId(String sessionId) {
+        int userId = 0;
+        String query = "SELECT * FROM session_data WHERE session_id = ?";
 
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
-        Connection connection;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Connection connection = null;
         try {
             connection = connectionPool.getConnection();
             preparedStatement = connection.prepareStatement(query);
@@ -73,10 +74,10 @@ public class SessionDAOimpl implements SessionDAO {
             preparedStatement.close();
             resultSet.close();
             connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return userId;
-    }*/
+    }
 }

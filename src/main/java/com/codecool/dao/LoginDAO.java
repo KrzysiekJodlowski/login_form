@@ -7,4 +7,6 @@ public interface LoginDAO {
 
     boolean checkIfUserExists(String username, String password);
     User getUser(String username, String password);
+    User getUserById(int userId);
+
 }

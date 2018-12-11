@@ -65,9 +65,9 @@ public class LoginController implements HttpHandler {
                     context = "/hello";
                 }
             } else {
-                context = "/login";
+                context = "/usernotfound";
             }
-            redirectController.redirect(httpExchange, context);
+            redirectController.redirect(httpExchange, context, username);
         }
     }
 
