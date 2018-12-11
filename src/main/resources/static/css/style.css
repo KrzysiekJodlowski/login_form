@@ -41,6 +41,11 @@ label {
     font-weight: bold;
 }
 
+#button:disabled,
+#button[disabled] {
+    background-color: grey;
+}
+
 #hello, #notfound {
     width: 50%;
     font-size: 2em;

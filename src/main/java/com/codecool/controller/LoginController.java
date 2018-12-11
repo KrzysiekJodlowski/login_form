@@ -10,8 +10,11 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpCookie;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,14 +52,15 @@ public class LoginController implements HttpHandler {
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
             String formData = br.readLine();
-            Map inputs = redirectController.parseFormData(formData);
-            String username = (String) inputs.get("username");
+            Map inputs = parseFormData(formData);
+
+            String userName = (String) inputs.get("username");
             String password = (String) inputs.get("password");
 
-            boolean userExists = loginDAO.checkIfUserExists(username, password);
+            boolean userExists = loginDAO.checkIfUserExists(userName, password);
 
             if (userExists) {
-                User user = loginDAO.getUser(username, password);
+                User user = loginDAO.getUser(userName, password);
                 HttpCookie cookie = new HttpCookie("sessionId", UUID.randomUUID().toString());
                 httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
                 sessionDAO.createSession(user.getUserId(), cookie.getValue());
@@ -78,5 +82,17 @@ public class LoginController implements HttpHandler {
             HttpCookie cookie = HttpCookie.parse(cookieString).get(0);
             sessionDAO.removeSession(cookie.getValue());
         }
+    }
+
+    public Map<String, String> parseFormData(String formData) throws UnsupportedEncodingException {
+        Map<String, String> map = new HashMap<>();
+        String[] pairs = formData.split("&");
+        for (String pair : pairs) {
+            String[] keyValue = pair.split("=");
+
+            String value = new URLDecoder().decode(keyValue[1], "UTF-8");
+            map.put(keyValue[0], value);
+        }
+        return map;
     }
 }
