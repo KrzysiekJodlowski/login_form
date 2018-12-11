@@ -27,7 +27,7 @@ public class UserNotFoundController implements HttpHandler {
         }
 
         if (method.equals("POST")) {
-            redirectController.redirect(httpExchange, "/login", null);
+            redirectController.redirect(httpExchange, "/login");
         }
     }
 }

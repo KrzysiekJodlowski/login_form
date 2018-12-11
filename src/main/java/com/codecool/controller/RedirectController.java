@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class RedirectController {
 
-    public void redirect(HttpExchange httpExchange, String contextName, String username) throws IOException {
+    public void redirect(HttpExchange httpExchange, String contextName) throws IOException {
 
         Headers req = httpExchange.getRequestHeaders();
         String host = req.getFirst("Host");

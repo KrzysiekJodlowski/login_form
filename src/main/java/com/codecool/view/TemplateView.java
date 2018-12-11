@@ -13,7 +13,17 @@ public class TemplateView {
     public void showTemplate(HttpExchange httpExchange, String templatePath) throws IOException {
         JtwigTemplate template = JtwigTemplate.classpathTemplate(templatePath);
         JtwigModel model = JtwigModel.newModel();
+        sendTemplate(httpExchange, template, model);
+    }
 
+    public void showHello(HttpExchange httpExchange, String templatePath, String userName) throws IOException {
+        JtwigTemplate template = JtwigTemplate.classpathTemplate(templatePath);
+        JtwigModel model = JtwigModel.newModel();
+        model.with("userName", userName);
+        sendTemplate(httpExchange, template, model);
+    }
+
+    private void sendTemplate(HttpExchange httpExchange, JtwigTemplate template, JtwigModel model) throws IOException {
         String response = template.render(model);
         httpExchange.sendResponseHeaders(200, 0);
         OutputStream os = httpExchange.getResponseBody();
