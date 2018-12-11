@@ -2,15 +2,17 @@ package com.codecool.model;
 
 
 public class User {
-    private String login;
-    private  String password;
+    private int userId;
+    private String userName;
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
+    public User(int userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
-    public String getLogin() {
-        return this.login;
+    public int getUserId() {return this.userId; }
+
+    public String getUserName() {
+        return this.userName;
     }
 }
